@@ -1,2 +1,8 @@
 # jubilant-tribble
-tool to record your working hours
+Tool to record your working hours.
+
+## Installation
+
+## Supported Environments
+
+- MacOS
