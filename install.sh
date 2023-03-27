@@ -2,9 +2,9 @@
 
 echo "Warm welcome to jubilant-tribble."
 
-echo "Please enter the installation directory path:"
-
-read USER_INPUT_INSTALL_DIRECTORY
+# https://stackoverflow.com/questions/2642585/read-a-variable-in-bash-with-a-default-value
+read -p "Please enter the installation directory path [~/.tribble]:" USER_INPUT_INSTALL_DIRECTORY
+USER_INPUT_INSTALL_DIRECTORY=${USER_INPUT_INSTALL_DIRECTORY:-~/.tribble}
 
 if [ -z $JUBILANT_TRIBBLE_HOME ]; then
 echo "Now, I copy my shell scripts to the directory you have entered: $USER_INPUT_INSTALL_DIRECTORY"
@@ -13,6 +13,7 @@ export JUBILANT_TRIBBLE_HOME="$USER_INPUT_INSTALL_DIRECTORY"
 MACOS_LOCAL_LAUNCHD="~/Library/LaunchAgents"
 
 mkdir -p $JUBILANT_TRIBBLE_HOME/tmp/
+mkdir -p $JUBILANT_TRIBBLE_HOME/logs/
 
 cp clear_database.sh $JUBILANT_TRIBBLE_HOME
 cp create_timestamp.sh $JUBILANT_TRIBBLE_HOME
