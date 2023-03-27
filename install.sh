@@ -18,8 +18,8 @@ export JUBILIANT_TRIBBLE_HOME="$USER_INPUT_INSTALL_DIRECTORY"
 echo "export JUBILIANT_TRIBBLE_HOME=$USER_INPUT_INSTALL_DIRECTORY" >> ~/.zshrc
 
 echo "Add tribble alias to your shell: tribble_start, tribble_end"
-echo "alias tribble_start ./$USER_INPUT_INSTALL_DIRECTORY/create_timestamp start" >> ~/.zshrc
-echo "alias tribble_end ./$USER_INPUT_INSTALL_DIRECTORY/create_timestamp end" >> ~/.zshrc
+echo "alias tribble_start=\"$USER_INPUT_INSTALL_DIRECTORY/create_timestamp.sh start\"" >> ~/.zshrc
+echo "alias tribble_end=\"$USER_INPUT_INSTALL_DIRECTORY/create_timestamp.sh end\"" >> ~/.zshrc
 
 echo "Now, I create your database: $JUBILIANT_TRIBBLE_HOME/tribble.db"
 
