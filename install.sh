@@ -9,11 +9,19 @@ read USER_INPUT_INSTALL_DIRECTORY
 if [ -z $JUBILANT_TRIBBLE_HOME ]; then
 echo "Now, I copy my shell scripts to the directory you have entered: $USER_INPUT_INSTALL_DIRECTORY"
 
-cp clear_database.sh $USER_INPUT_INSTALL_DIRECTORY
-cp create_timestamp.sh $USER_INPUT_INSTALL_DIRECTORY
+export JUBILANT_TRIBBLE_HOME="$USER_INPUT_INSTALL_DIRECTORY"
+MACOS_LOCAL_LAUNCHD="~/Library/LaunchAgents"
+
+mkdir -p $JUBILANT_TRIBBLE_HOME/tmp/
+
+cp clear_database.sh $JUBILANT_TRIBBLE_HOME
+cp create_timestamp.sh $JUBILANT_TRIBBLE_HOME
+
+cp jubilant.tribble.plist $JUBILANT_TRIBBLE_HOME/tmp/
+
+sed -i "" "s|{tribble_install_path}|$MACOS_LOCAL_LAUNCHD/jubilant.tribble.plist|g" ${JUBILANT_TRIBBLE_HOME}/tmp/jubilant.tribble.plist
 
 echo "Now, I add the path to the scripts to your local .zshrc."
-export JUBILANT_TRIBBLE_HOME="$USER_INPUT_INSTALL_DIRECTORY"
 
 echo "export JUBILANT_TRIBBLE_HOME=$USER_INPUT_INSTALL_DIRECTORY" >> ~/.zshrc
 
