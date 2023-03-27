@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sqlite3 $JUBILIANT_TRIBBLE_HOME/tribble.db <<'END_SQL'
+sqlite3 $JUBILANT_TRIBBLE_HOME/tribble.db <<'END_SQL'
 .timeout 2000
 DELETE from worktime;
 VACUUM;
