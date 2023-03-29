@@ -17,6 +17,7 @@ mkdir -p $JUBILANT_TRIBBLE_HOME/logs/
 
 cp clear_database.sh $JUBILANT_TRIBBLE_HOME
 cp create_timestamp.sh $JUBILANT_TRIBBLE_HOME
+cp tribble_loop.sh $JUBILANT_TRIBBLE_HOME
 
 cp template_jubilant_tribble.plist $JUBILANT_TRIBBLE_HOME/tmp/
 
