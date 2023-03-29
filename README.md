@@ -18,6 +18,32 @@ install.sh
 
 and follow the instructions.
 
+## Add Shortcuts
+
+To make it simple to execute the shell commands you can add shortcuts to your menu bar for example.
+
+### Common steps to add a shortcut
+
+Go to shortcuts app, click on __+__ button (new shortcut), look for __execute shell script__, copy shell script from below to the edit field. With click on the information symbol (i) you can configure to pin your shortcut to menu bar for example.
+
+### script to execute tribble start
+```shell
+source ~/.zshrc
+tribble_start
+```
+
+### script to execute tribble end
+```shell
+source ~/.zshrc
+tribble_end
+```
+
+### script to execute tribble loop
+```shell
+source ~/.zshrc
+tribble_loop
+```
+
 ## Supported Environments
 
 - MacOS:

@@ -34,9 +34,11 @@ echo "Now, I add tribble alias to your shell ~/.zshrc to clock in or clock out m
 echo 'alias tribble_start="$JUBILANT_TRIBBLE_HOME/create_timestamp.sh start m"' >> ~/.zshrc
 echo 'alias tribble_end="$JUBILANT_TRIBBLE_HOME/create_timestamp.sh end m"' >> ~/.zshrc
 
-echo "Now, I add tribble alias to your shell ~/.zshrc to clock in or clock out with automatism: automatic_tribble_start, automatic_tribble_end"
+echo "Now, I add tribble alias to your shell ~/.zshrc to clock in or clock out with automatism: automatic_tribble_start, automatic_tribble_end, tribble_loop"
 echo 'alias automatic_tribble_start="$JUBILANT_TRIBBLE_HOME/create_timestamp.sh start a"' >> ~/.zshrc
 echo 'alias automatic_tribble_end="$JUBILANT_TRIBBLE_HOME/create_timestamp.sh end a"' >> ~/.zshrc
+
+echo 'alias tribble_loop="$JUBILANT_TRIBBLE_HOME/tribble_loop.sh"' >> ~/.zshrc
 
 echo "Now, I create your database: $JUBILANT_TRIBBLE_HOME/tribble.db"
 
@@ -50,6 +52,10 @@ else
 
 echo "Variable JUBILANT_TRIBBLE_HOME is set to: $JUBILANT_TRIBBLE_HOME."
 
-echo "jubilant-tribble appears to be installed. Better I do nothing."
+echo "jubilant-tribble appears to be installed. I only update the scripts on this location."
+
+cp clear_database.sh $JUBILANT_TRIBBLE_HOME
+cp create_timestamp.sh $JUBILANT_TRIBBLE_HOME
+cp tribble_loop.sh $JUBILANT_TRIBBLE_HOME
 
 fi
