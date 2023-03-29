@@ -38,12 +38,6 @@ source ~/.zshrc
 tribble_end
 ```
 
-### script to execute tribble loop
-```shell
-source ~/.zshrc
-tribble_loop
-```
-
 ## Supported Environments
 
 - MacOS:
