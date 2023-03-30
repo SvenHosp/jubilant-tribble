@@ -20,6 +20,12 @@ if [ ! -z $JUBILANT_TRIBBLE_HOME ]; then
         conda run -n $TRIBBLE_CONDA_ENV_NAME pip install  -r requirements.txt
     fi
 
+    BACKUP_NAME="backup_$(date +"%Y%m%d%H%M%S")"
+
+    echo "Now, I add the path to the scripts to your local .zshrc. Before I do this do a backup of your config: .zshrc_$BACKUP_NAME"
+
+    cp ~/.zshrc ~/.zshrc_$BACKUP_NAME
+
     ! grep "alias tribble_ui=" ~/.zshrc && echo 'alias tribble_ui="$JUBILANT_TRIBBLE_HOME/start_tribble_ui.sh"' >> ~/.zshrc
     cp start_tribble_ui.sh $JUBILANT_TRIBBLE_HOME
 

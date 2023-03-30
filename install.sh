@@ -29,7 +29,11 @@ cp clock.sh $JUBILANT_TRIBBLE_HOME
 # move .plist file to $MACOS_LOCAL_LAUNCHD and rename it to com.$USER.jubilant_tribble.plist
 # activate in launchd using launchctl load com.$USER.jubilant_tribble.plist
 
-echo "Now, I add the path to the scripts to your local .zshrc."
+BACKUP_NAME="backup_$(date +"%Y%m%d%H%M%S")"
+
+echo "Now, I add the path to the scripts to your local .zshrc. Before I do this do a backup of your config: .zshrc_$BACKUP_NAME"
+
+cp ~/.zshrc ~/.zshrc_$BACKUP_NAME
 
 ! grep "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" ~/.zshrc && echo "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" >> ~/.zshrc
 

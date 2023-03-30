@@ -10,4 +10,4 @@ if [ -z $TRIBBLE_CONDA_ENV_NAME ]; then
     exit -1
 fi
 
-conda run -n $TRIBBLE_CONDA_ENV_NAME python -m jupyter lab > $JUBILANT_TRIBBLE_HOME/logs/jupyter_ui.log
+conda run -n $TRIBBLE_CONDA_ENV_NAME python -m jupyter lab --port=80 > $JUBILANT_TRIBBLE_HOME/logs/jupyter_ui.log
