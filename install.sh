@@ -6,18 +6,21 @@ echo "Warm welcome to jubilant-tribble."
 read -p "Please enter the installation directory path [~/.tribble]:" USER_INPUT_INSTALL_DIRECTORY
 USER_INPUT_INSTALL_DIRECTORY=${USER_INPUT_INSTALL_DIRECTORY:-~/.tribble}
 
-if [ -z $JUBILANT_TRIBBLE_HOME ]; then
 echo "Now, I copy my shell scripts to the directory you have entered: $USER_INPUT_INSTALL_DIRECTORY"
 
 export JUBILANT_TRIBBLE_HOME="$USER_INPUT_INSTALL_DIRECTORY"
 MACOS_LOCAL_LAUNCHD="~/Library/LaunchAgents"
 
-mkdir -p $JUBILANT_TRIBBLE_HOME/tmp/
-mkdir -p $JUBILANT_TRIBBLE_HOME/logs/
+if [ ! -d "$JUBILANT_TRIBBLE_HOME/tmp/" ]; then
+    mkdir -p $JUBILANT_TRIBBLE_HOME/tmp/
+fi
+if [ ! -d "$JUBILANT_TRIBBLE_HOME/logs/" ]; then
+    mkdir -p $JUBILANT_TRIBBLE_HOME/logs/
+fi
+
 
 cp clear_database.sh $JUBILANT_TRIBBLE_HOME
-cp clock_in.sh $JUBILANT_TRIBBLE_HOME
-cp clock_out.sh $JUBILANT_TRIBBLE_HOME
+cp clock.sh $JUBILANT_TRIBBLE_HOME
 
 #cp template_jubilant_tribble.plist $JUBILANT_TRIBBLE_HOME/tmp/
 
@@ -28,11 +31,10 @@ cp clock_out.sh $JUBILANT_TRIBBLE_HOME
 
 echo "Now, I add the path to the scripts to your local .zshrc."
 
-echo "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" >> ~/.zshrc
+! grep "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" ~/.zshrc && echo "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" >> ~/.zshrc
 
-echo "Now, I add tribble alias to your shell ~/.zshrc to clock in or clock out manually: tribble_start, tribble_end"
-echo 'alias tribble_start="$JUBILANT_TRIBBLE_HOME/clock_in.sh m"' >> ~/.zshrc
-echo 'alias tribble_end="$JUBILANT_TRIBBLE_HOME/clock_out.sh m"' >> ~/.zshrc
+echo "Now, I add tribble alias to your shell ~/.zshrc to clock in or clock out manually: tribble_start"
+! grep "alias tribble=" ~/.zshrc && echo 'alias tribble="$JUBILANT_TRIBBLE_HOME/clock.sh m"' >> ~/.zshrc
 
 echo "Now, I create your database: $JUBILANT_TRIBBLE_HOME/tribble.db"
 
@@ -42,14 +44,3 @@ CREATE TABLE IF NOT EXISTS worktime(timeslot timestamp NOT NULL, timeslot_begin 
 END_SQL
 
 echo "I finished my work! You can now use jubilant-tribble."
-else
-
-echo "Variable JUBILANT_TRIBBLE_HOME is set to: $JUBILANT_TRIBBLE_HOME."
-
-echo "jubilant-tribble appears to be installed. I only update the scripts on this location."
-
-cp clear_database.sh $JUBILANT_TRIBBLE_HOME
-cp clock_in.sh $JUBILANT_TRIBBLE_HOME
-cp clock_out.sh $JUBILANT_TRIBBLE_HOME
-
-fi
