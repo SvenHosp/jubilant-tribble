@@ -1,0 +1,76 @@
+{
+    "data": {
+        "layout-restorer:data": {
+            "main": {
+                "dock": {
+                    "type": "split-area",
+                    "orientation": "horizontal",
+                    "sizes": [
+                        0.37634304775280897,
+                        0.623656952247191
+                    ],
+                    "children": [
+                        {
+                            "type": "tab-area",
+                            "currentIndex": 0,
+                            "widgets": [
+                                "notebook:tribble_status.ipynb"
+                            ]
+                        },
+                        {
+                            "type": "tab-area",
+                            "currentIndex": 0,
+                            "widgets": [
+                                "notebook:tribble.ipynb"
+                            ]
+                        }
+                    ]
+                },
+                "current": "notebook:tribble_status.ipynb"
+            },
+            "down": {
+                "size": 0,
+                "widgets": []
+            },
+            "left": {
+                "collapsed": false,
+                "current": "filebrowser",
+                "widgets": [
+                    "filebrowser",
+                    "running-sessions",
+                    "@jupyterlab/toc:plugin",
+                    "extensionmanager.main-view"
+                ]
+            },
+            "right": {
+                "collapsed": true,
+                "widgets": [
+                    "jp-property-inspector",
+                    "debugger-sidebar"
+                ]
+            },
+            "relativeSizes": [
+                0.15677701436602123,
+                0.8432229856339788,
+                0
+            ]
+        },
+        "notebook:trbble_status.ipynb": {
+            "data": {
+                "path": "tribble_status.ipynb",
+                "factory": "Notebook"
+            }
+        },
+        "notebook:tribble.ipynb": {
+            "data": {
+                "path": "tribble.ipynb",
+                "factory": "Notebook"
+            }
+        }
+    },
+    "metadata": {
+        "id": "tribble",
+        "last_modified": "2023-03-31T05:55:10.327220+00:00",
+        "created": "2023-03-31T05:55:10.327220+00:00"
+    }
+}

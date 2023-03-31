@@ -10,4 +10,12 @@ if [ -z $TRIBBLE_CONDA_ENV_NAME ]; then
     exit -1
 fi
 
-conda run -n $TRIBBLE_CONDA_ENV_NAME python -m jupyter lab --port=8081 > $JUBILANT_TRIBBLE_HOME/logs/jupyter_ui.log
+rm -rf $JUBILANT_TRIBBLE_HOME_UI/.ipynb_checkpoints
+
+mkdir -p $JUBILANT_TRIBBLE_HOME_UI
+cd $JUBILANT_TRIBBLE_HOME_UI
+cp $JUBILANT_TRIBBLE_HOME/tribble.ipynb $JUBILANT_TRIBBLE_HOME_UI
+cp $JUBILANT_TRIBBLE_HOME/tribble_status.ipynb $JUBILANT_TRIBBLE_HOME_UI
+
+conda run -n $TRIBBLE_CONDA_ENV_NAME python -m jupyter lab workspaces import $JUBILANT_TRIBBLE_HOME/workspaces/tribble.json
+conda run -n $TRIBBLE_CONDA_ENV_NAME python -m jupyter lab --port=8081 --LabApp.default_url='/lab/workspaces/tribble' > $JUBILANT_TRIBBLE_HOME/logs/jupyter_ui.log
