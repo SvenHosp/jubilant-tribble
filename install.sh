@@ -44,7 +44,7 @@ echo "Now, I create your database: $JUBILANT_TRIBBLE_HOME/tribble.db"
 
 sqlite3 $JUBILANT_TRIBBLE_HOME/tribble.db <<'END_SQL'
 .timeout 2000
-CREATE TABLE IF NOT EXISTS worktime(timeslot timestamp NOT NULL, timeslot_begin boolean, t_id NUMERIC, symbol text, type text, comment text);
+CREATE TABLE IF NOT EXISTS worktime(timeslot_begin timestamp NOT NULL, timeslot_end timestamp, timeslot_finish boolean, t_id NUMERIC, symbol text, type text, comment text, timezone TEXT DEFAULT "+0000" NOT NULL);
 END_SQL
 
 echo "I finished my work! You can now use jubilant-tribble."
