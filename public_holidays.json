@@ -1,0 +1,251 @@
+[
+    {
+        "day": "01.01",
+        "name": {
+            "english": "New Year",
+            "german": "Neujahr"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {}
+    },
+    {
+        "day": "08.03",
+        "name": {
+            "english": "Womens Day",
+            "german": "Frauentag"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B"
+                ]
+            }
+        ],
+        "formula": {}
+    },
+    {
+        "day": ".",
+        "name": {
+            "english": "Good Friday",
+            "german": "Karfreitag"
+        },
+        "type": "calc",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {
+            "reference": "easter",
+            "difference": -2
+        }
+    },
+    {
+        "day": ".",
+        "name": {
+            "english": "Easter",
+            "german": "Ostern"
+        },
+        "type": "calc",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {
+            "reference": "easter",
+            "difference": 0
+        }
+    },
+    {
+        "day": ".",
+        "name": {
+            "english": "Easter Monday",
+            "german": "Ostermontag"
+        },
+        "type": "calc",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {
+            "reference": "easter",
+            "difference": 1
+        }
+    },
+    {
+        "day": "01.05",
+        "name": {
+            "english": "Labor Day",
+            "german": "Tag der Arbeit"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {}
+    },
+    {
+        "day": ".",
+        "name": {
+            "english": "Ascension Day",
+            "german": "Himmelfahrt"
+        },
+        "type": "calc",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {
+            "reference": "easter",
+            "difference": 39
+        }
+    },
+    {
+        "day": ".",
+        "name": {
+            "english": "Whitsun",
+            "german": "Pfingsten"
+        },
+        "type": "calc",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {
+            "reference": "easter",
+            "difference": 49
+        }
+    },
+    {
+        "day": ".",
+        "name": {
+            "english": "Whit Monday",
+            "german": "Pfingstmontag"
+        },
+        "type": "calc",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {
+            "reference": "easter",
+            "difference": 50
+        }
+    },
+    {
+        "day": "03.10.",
+        "name": {
+            "english": "Tag der deutschen Einheit",
+            "german": "Tag der deutschen Einheit"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {}
+    },
+    {
+        "day": "31.10.",
+        "name": {
+            "english": "reformation day",
+            "german": "Reformationstag"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {}
+    },
+    {
+        "day": "25.12.",
+        "name": {
+            "english": "1st christmas day",
+            "german": "Erster Weihnachtstag"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {}
+    },
+    {
+        "day": "26.12.",
+        "name": {
+            "english": "2nd christmas day",
+            "german": "Zweiter Weihnachtstag"
+        },
+        "type": "fix",
+        "countries": [
+            {
+                "name": "germany",
+                "territories": [
+                    "B",
+                    "BB"
+                ]
+            }
+        ],
+        "formula": {}
+    }
+]

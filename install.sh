@@ -21,6 +21,8 @@ fi
 
 cp clear_database.sh $JUBILANT_TRIBBLE_HOME
 cp clock.sh $JUBILANT_TRIBBLE_HOME
+cp public_holidays.json $JUBILANT_TRIBBLE_HOME
+cp special_days_template.json $JUBILANT_TRIBBLE_HOME/special_days_template.json
 
 #cp template_jubilant_tribble.plist $JUBILANT_TRIBBLE_HOME/tmp/
 
@@ -36,6 +38,8 @@ echo "Now, I add the path to the scripts to your local .zshrc. Before I do this 
 cp ~/.zshrc ~/.zshrc_$BACKUP_NAME
 
 ! grep "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" ~/.zshrc && echo "export JUBILANT_TRIBBLE_HOME=$JUBILANT_TRIBBLE_HOME" >> ~/.zshrc
+! grep "export JUBILANT_TRIBBLE_DATABASE=$JUBILANT_TRIBBLE_HOME" ~/.zshrc && echo "export JUBILANT_TRIBBLE_DATABASE=$JUBILANT_TRIBBLE_HOME/tribble.db" >> ~/.zshrc
+! grep "export JUBILANT_TRIBBLE_HOLIDAYS=$JUBILANT_TRIBBLE_HOME" ~/.zshrc && echo "export JUBILANT_TRIBBLE_HOLIDAYS=$JUBILANT_TRIBBLE_HOME/public_holidays.json" >> ~/.zshrc
 
 echo "Now, I add tribble alias to your shell ~/.zshrc to clock in or clock out manually: tribble_start"
 ! grep "alias tribble=" ~/.zshrc && echo 'alias tribble="$JUBILANT_TRIBBLE_HOME/clock.sh m"' >> ~/.zshrc

@@ -1,0 +1,33 @@
+{
+    "configuration":{
+        "time_format": "%d.%m.%Y",
+        "time_span_delimiter": "-",
+        "worktime_config": 
+        [
+            {
+                "time_span": "01.09.2023-",
+                "working_hours": 7.8
+            },
+            {
+                "time_span": "01.01.2023-01"
+            }
+        ],
+        ""
+    },
+    "Years": {
+        "2020": {
+            "holidays": {
+                "working_hours_multiplicator": 0,
+                "days": [
+                    "06.04.2023-16.04.2023"
+                ]
+            },
+            "ill": {
+                "working_hours_multiplicator": 0,
+                "days": [
+                    "06.03.2023-07.03.2023"
+                ]
+            }
+        }
+    }
+}
