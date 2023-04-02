@@ -5,11 +5,11 @@
         "worktime_config": 
         [
             {
-                "time_span": "01.09.2023-",
-                "working_hours": 7.8
+                "time_span": "01.09.2020-",
+                "working_hours": x.y
             },
             {
-                "time_span": "01.01.2023-01"
+                "time_span": "01.01.2020-01.05.2020"
             }
         ],
         ""
@@ -19,13 +19,13 @@
             "holidays": {
                 "working_hours_multiplicator": 0,
                 "days": [
-                    "06.04.2023-16.04.2023"
+                    "06.04.2020-16.04.2020"
                 ]
             },
             "ill": {
                 "working_hours_multiplicator": 0,
                 "days": [
-                    "06.03.2023-07.03.2023"
+                    "06.03.2020-07.03.2020"
                 ]
             }
         }
