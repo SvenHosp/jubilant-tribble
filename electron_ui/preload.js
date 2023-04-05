@@ -5,7 +5,16 @@
  * 
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
+
+const { contextBridge, ipcRenderer } = require('electron')
+
 window.addEventListener('DOMContentLoaded', () => {
+  const counter = document.getElementById('counter')
+  ipcRenderer.on('update-counter', (_event, value) => {
+    const oldValue = Number(counter.innerText)
+    const newValue = oldValue + value
+    counter.innerText = newValue
+})
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
     if (element) element.innerText = text
@@ -14,4 +23,9 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
+})
+
+contextBridge.exposeInMainWorld('electronAPI', {
+    setTitle: (title) => ipcRenderer.send('set-title', title),
+    openFile: () => ipcRenderer.invoke('dialog:openFile')
 })

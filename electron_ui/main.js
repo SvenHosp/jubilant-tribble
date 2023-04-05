@@ -1,7 +1,38 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Menu, MenuItem} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const sqlite3 = require('sqlite3').verbose()
 const path = require('path')
+
+async function handleFileOpen() {
+  const DATABASE_PATH = process.env.JUBILANT_TRIBBLE_DATABASE
+
+  console.log(DATABASE_PATH)
+
+  let db = new sqlite3.Database(DATABASE_PATH, (err) => {
+    if (err) {
+      return err.message
+    }
+    return `Connected to the database: ${DATABASE_PATH}`
+  });
+
+  db.close();
+}
+/*
+async function handleWorkingState() {
+  const { canceled, filePaths } = await dialog.showOpenDialog()
+  if (canceled) {
+    return
+  } else {
+    return filePaths[0]
+  }
+}
+*/
+
+function handleSetTitle (event, title) {
+  const webContents = event.sender
+  const win = BrowserWindow.fromWebContents(webContents)
+  win.setTitle(title)
+}
 
 function createWindow () {
   // Create the browser window.
@@ -12,7 +43,7 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
@@ -24,6 +55,8 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  ipcMain.on('set-title', handleSetTitle)
+  ipcMain.handle('dialog:openFile', handleFileOpen)
   createWindow()
 
   app.on('activate', function () {
@@ -43,16 +76,10 @@ app.on('window-all-closed', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 /*
-const DATABASE_PATH = process.env.JUBILANT_TRIBBLE_DATABASE
+function getCurrentWorkingState(){
 
-console.log(DATABASE_PATH)
+}
 
-let db = new sqlite3.Database(DATABASE_PATH, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log(`Connected to the database: ${DATABASE_PATH}`);
-});
 
-db.close();
+document.getElementById("btnEd").addEventListener("click", getCurrentWorkingState);
 */

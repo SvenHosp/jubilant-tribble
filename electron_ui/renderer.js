@@ -6,9 +6,20 @@
  * to expose Node.js functionality from the main process.
  */
 
+const setButton = document.getElementById('btn')
+const titleInput = document.getElementById('title')
+const span_out = document.getElementById('outcome')
 
-function getCurrentWorkingState(){
-    console.log('called')
-}
+setButton.addEventListener('click', () => {
+    const title = titleInput.value
+    //window.electronAPI.setTitle(title)
+    span_out.innerText = title
+});
 
-document.getElementById("btnEd").addEventListener("click", getCurrentWorkingState);
+const btn = document.getElementById('btn2')
+const filePathElement = document.getElementById('filePath')
+
+btn.addEventListener('click', async () => {
+  const filePath = await window.electronAPI.openFile()
+  filePathElement.innerText = filePath
+})
