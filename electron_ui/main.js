@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu, MenuItem} = require('electron')
+const sqlite3 = require('sqlite3').verbose()
 const path = require('path')
 
 function createWindow () {
@@ -41,3 +42,17 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+/*
+const DATABASE_PATH = process.env.JUBILANT_TRIBBLE_DATABASE
+
+console.log(DATABASE_PATH)
+
+let db = new sqlite3.Database(DATABASE_PATH, (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log(`Connected to the database: ${DATABASE_PATH}`);
+});
+
+db.close();
+*/
