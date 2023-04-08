@@ -25,3 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })
 
+contextBridge.exposeInMainWorld('electronAPI', {
+  connect_to_db: () => ipcRenderer.invoke('connect_db').then((result) => {
+    const element = document.getElementById('outcome')
+    if (element) element.innerText = result
+  })
+})

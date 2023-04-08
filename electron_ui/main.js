@@ -2,21 +2,28 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const sqlite3 = require('sqlite3').verbose()
 const path = require('path')
+let db = {}
 
-async function handleFileOpen() {
+async function db_connect() {
   const DATABASE_PATH = process.env.JUBILANT_TRIBBLE_DATABASE
 
-  console.log(DATABASE_PATH)
+  console.log(`path to db is ${DATABASE_PATH}`)
 
-  let db = new sqlite3.Database(DATABASE_PATH, (err) => {
+  db = new sqlite3.Database(DATABASE_PATH, (err) => {
     if (err) {
       return err.message
     }
-    return `Connected to the database: ${DATABASE_PATH}`
   });
 
   db.close();
+
+  return `path to db is ${DATABASE_PATH}`
 }
+
+ipcMain.handle('connect_db', async (event) => {
+  let result = await db_connect()
+  return result
+})
 
 function createWindow () {
   // Create the browser window.
