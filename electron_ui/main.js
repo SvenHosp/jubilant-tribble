@@ -17,16 +17,6 @@ async function handleFileOpen() {
 
   db.close();
 }
-/*
-async function handleWorkingState() {
-  const { canceled, filePaths } = await dialog.showOpenDialog()
-  if (canceled) {
-    return
-  } else {
-    return filePaths[0]
-  }
-}
-*/
 
 function handleSetTitle (event, title) {
   const webContents = event.sender
@@ -55,8 +45,6 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  ipcMain.on('set-title', handleSetTitle)
-  ipcMain.handle('dialog:openFile', handleFileOpen)
   createWindow()
 
   app.on('activate', function () {
@@ -75,11 +63,3 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-/*
-function getCurrentWorkingState(){
-
-}
-
-
-document.getElementById("btnEd").addEventListener("click", getCurrentWorkingState);
-*/
