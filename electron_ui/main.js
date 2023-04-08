@@ -18,12 +18,6 @@ async function handleFileOpen() {
   db.close();
 }
 
-function handleSetTitle (event, title) {
-  const webContents = event.sender
-  const win = BrowserWindow.fromWebContents(webContents)
-  win.setTitle(title)
-}
-
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
