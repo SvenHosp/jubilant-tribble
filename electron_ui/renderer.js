@@ -5,10 +5,10 @@
  * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
  * to expose Node.js functionality from the main process.
  */
-
+/*
 const dbButton = document.getElementById('btn')
 
 dbButton.addEventListener('click', async () => {
   await window.electronAPI.connect_to_db()
 })
-
+*/
