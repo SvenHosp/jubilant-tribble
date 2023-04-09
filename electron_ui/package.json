@@ -1,25 +1,21 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "tribble",
+  "version": "0.0.1",
+  "description": "clock your working hours",
   "main": "main.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "tribble",
+    "working",
+    "hours"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "sven hosp",
+  "license": "ISC",
   "devDependencies": {
-    "electron": "^23.2.1"
-  },
-  "dependencies": {
+    "electron": "^24.0.0",
     "sqlite3": "^5.1.6"
   }
 }
