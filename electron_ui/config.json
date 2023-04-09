@@ -1,0 +1,10 @@
+{
+    "clock_types": [
+        {
+            "name": "common"
+        },
+        {
+            "name": "operations"
+        }
+    ]
+}

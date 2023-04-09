@@ -26,6 +26,22 @@ window.addEventListener('DOMContentLoaded', () => {
       if (element) element.innerText = result
     })
   })
+  ipcRenderer.invoke('get_clock_types').then((clock_types_config) => {
+    for (const index in clock_types_config){
+      const clockButton = document.createElement('button')
+      const symbol = clock_types_config[index]["name"]
+      clockButton.id = symbol
+      clockButton.innerText = `clock ${symbol}`
+      clockButton.addEventListener('click', async () => {
+        ipcRenderer.invoke('clock_hours', symbol)
+      })
+      document.body.appendChild(clockButton)
+    }
+  })
+  
+  /*
+  
+  */
 })
 /*
 contextBridge.exposeInMainWorld('electronAPI', {
