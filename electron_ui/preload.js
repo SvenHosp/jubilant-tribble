@@ -19,6 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // add clock status
   const first_row = document.createElement('tr')
   const db_column = document.createElement('td')
+  const span_column = document.createElement('td')
 
   const db_button = document.createElement('button')
   db_button.id = 'button_db_status'
@@ -34,8 +35,9 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   db_column.appendChild(db_button)
-  db_column.appendChild(db_span)
+  span_column.appendChild(db_span)
   first_row.appendChild(db_column)
+  first_row.appendChild(span_column)
   table_root.appendChild(first_row)
 
   document.body.appendChild(table_root)
@@ -43,7 +45,8 @@ window.addEventListener('DOMContentLoaded', () => {
   ipcRenderer.invoke('get_clock_types').then((clock_types_list) => {
     clock_types_list.forEach((clock_type) => {
       const row = document.createElement('tr')
-      const column = document.createElement('td')
+      const button_column = document.createElement('td')
+      const span_column = document.createElement('td')
       const clock_button = document.createElement('button')
       const span_symbol = document.createElement('span')
 
@@ -58,9 +61,10 @@ window.addEventListener('DOMContentLoaded', () => {
         ipcRenderer.invoke('clock_hours', symbol)
       })
 
-      column.appendChild(clock_button)
-      column.appendChild(span_symbol)
-      row.appendChild(column)
+      button_column.appendChild(clock_button)
+      span_column.appendChild(span_symbol)
+      row.appendChild(button_column)
+      row.appendChild(span_column)
       table_root.appendChild(row)
     })
   })
