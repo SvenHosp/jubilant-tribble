@@ -1,4 +1,4 @@
-# jubilant-tribble
+# purring-tribble
 
 Tool to record your working hours.
 
@@ -16,7 +16,12 @@ To install jubilant-tribble run in your shell
 install.sh
 ```
 
-and follow the instructions.
+and follow the instructions. I recommend to install at least the tribble ui and add the application as a shortcut.
+
+```shell
+source ~/.zshrc
+tribble
+```
 
 ## Add Shortcuts
 
