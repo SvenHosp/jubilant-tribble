@@ -8,46 +8,60 @@
 
 const { contextBridge, ipcRenderer } = require('electron')
 
+contextBridge.exposeInMainWorld('electronAPI', {
+  receive_active_clocks: (callback) => ipcRenderer.on('send_active_clocks', callback)
+})
+
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
 
-  for (const dependency of ['chrome', 'node', 'electron']) {
-    replaceText(`${dependency}-version`, process.versions[dependency])
-  }
+  const table_root = document.createElement('table')
 
-  // add eventlistener for button
-  const dbButton = document.getElementById('btn')
-  dbButton.addEventListener('click', async () => {
-    ipcRenderer.invoke('connect_db').then((result) => {
-      const element = document.getElementById('outcome')
+  // add clock status
+  const first_row = document.createElement('tr')
+  const db_column = document.createElement('td')
+
+  const db_button = document.createElement('button')
+  db_button.id = 'button_db_status'
+  db_button.innerText = 'get clock status'
+  const db_span = document.createElement('span')
+  db_span.id = 'span_db_status'
+
+  db_button.addEventListener('click', async () => {
+    ipcRenderer.invoke('get_active_clocks').then((result) => {
+      const element = document.getElementById('db_status')
       if (element) element.innerText = result
     })
   })
-  ipcRenderer.invoke('get_clock_types').then((clock_types_config) => {
-    for (const index in clock_types_config){
-      const clockButton = document.createElement('button')
-      const symbol = clock_types_config[index]["name"]
-      clockButton.id = symbol
-      clockButton.innerText = `clock ${symbol}`
-      clockButton.addEventListener('click', async () => {
+
+  db_column.appendChild(db_button)
+  db_column.appendChild(db_span)
+  first_row.appendChild(db_column)
+  table_root.appendChild(first_row)
+
+  document.body.appendChild(table_root)
+
+  ipcRenderer.invoke('get_clock_types').then((clock_types_list) => {
+    clock_types_list.forEach((clock_type) => {
+      const row = document.createElement('tr')
+      const column = document.createElement('td')
+      const clock_button = document.createElement('button')
+      const span_symbol = document.createElement('span')
+
+      const symbol = clock_type
+
+      clock_button.id = `button_${symbol}`
+      span_symbol.id = `span_${symbol}`
+
+      clock_button.innerText = `clock ${symbol}`
+
+      clock_button.addEventListener('click', async () => {
         ipcRenderer.invoke('clock_hours', symbol)
       })
-      document.body.appendChild(clockButton)
-    }
-  })
-  
-  /*
-  
-  */
-})
-/*
-contextBridge.exposeInMainWorld('electronAPI', {
-  connect_to_db: () => ipcRenderer.invoke('connect_db').then((result) => {
-    const element = document.getElementById('outcome')
-    if (element) element.innerText = result
+
+      column.appendChild(clock_button)
+      column.appendChild(span_symbol)
+      row.appendChild(column)
+      table_root.appendChild(row)
+    })
   })
 })
-*/

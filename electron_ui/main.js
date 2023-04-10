@@ -1,29 +1,40 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const sqlite3 = require('sqlite3').verbose()
 const path = require('path')
 
+var clock_types = []
 
-async function db_connect() {
+async function get_active_clocks() {
   const DATABASE_PATH = process.env.JUBILANT_TRIBBLE_DATABASE
-
-  console.log(`path to db is ${DATABASE_PATH}`)
 
   const db = new sqlite3.Database(DATABASE_PATH, (err) => {
     if (err) {
       return err.message
     }
   });
-  //SELECT symbol from worktime w WHERE w.timeslot_finish == FALSE;
+
+  let sql = "SELECT symbol from worktime w WHERE w.timeslot_finish == FALSE;"
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    var _active_clocks = []
+    rows.forEach((row) => {
+      _active_clocks.push(row.symbol);
+    });
+
+    BrowserWindow.getAllWindows().forEach((window) => {
+      window.webContents.send('send_active_clocks', _active_clocks, clock_types)
+    });
+  });
 
   db.close();
-
-  return `path to db is ${DATABASE_PATH}`
 }
 
-ipcMain.handle('connect_db', async (event) => {
-  let result = await db_connect()
-  return result
+ipcMain.handle('get_active_clocks', async (event) => {
+  get_active_clocks()
 })
 
 ipcMain.handle('get_clock_types', async (event) => {
@@ -31,22 +42,27 @@ ipcMain.handle('get_clock_types', async (event) => {
   const fs = require('fs')
   const config = JSON.parse(fs.readFileSync(path))
   const clock_types_config = config["clock_types"]
+  var _clock_types = []
+  clock_types_config.forEach((clock_type_obj) => {
+    _clock_types.push(clock_type_obj.name)
+  })
+  clock_types = _clock_types
 
-  return clock_types_config 
+  return clock_types 
 })
 
 ipcMain.handle('clock_hours', async (event, symbol) => {
   // logic to clock_in
   const execSync = require('child_process').execSync;
-  const out = execSync(`zsh ../clock.sh m ${symbol}`, { encoding: 'utf-8' })
-  console.log(out)
+  execSync(`zsh ../clock.sh m ${symbol}`, { encoding: 'utf-8' })
+  get_active_clocks()
 })
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 200,
+    height: 300,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -56,7 +72,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
