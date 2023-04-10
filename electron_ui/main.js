@@ -6,7 +6,7 @@ const path = require('path')
 var clock_types = []
 
 async function get_active_clocks() {
-  const DATABASE_PATH = process.env.JUBILANT_TRIBBLE_DATABASE
+  const DATABASE_PATH = process.env.PURRING_TRIBBLE_DATABASE
 
   const db = new sqlite3.Database(DATABASE_PATH, (err) => {
     if (err) {
@@ -38,7 +38,8 @@ ipcMain.handle('get_active_clocks', async (event) => {
 })
 
 ipcMain.handle('get_clock_types', async (event) => {
-  let path = "config.json"
+  const application_path = process.env.PURRING_TRIBBLE_HOME_APPLICATION
+  let path = `${application_path}/config.json`
   const fs = require('fs')
   const config = JSON.parse(fs.readFileSync(path))
   const clock_types_config = config["clock_types"]
@@ -53,8 +54,9 @@ ipcMain.handle('get_clock_types', async (event) => {
 
 ipcMain.handle('clock_hours', async (event, symbol) => {
   // logic to clock_in
+  const application_path = process.env.PURRING_TRIBBLE_HOME_APPLICATION
   const execSync = require('child_process').execSync;
-  execSync(`zsh ../clock.sh m ${symbol}`, { encoding: 'utf-8' })
+  execSync(`zsh ${application_path}/clock.sh m ${symbol}`, { encoding: 'utf-8' })
   get_active_clocks()
 })
 

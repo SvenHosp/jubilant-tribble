@@ -10,10 +10,10 @@ echo "Now, I copy my shell scripts to the directory you have entered: $USER_INPU
 
 export PURRING_TRIBBLE_HOME="$USER_INPUT_INSTALL_DIRECTORY"
 export PURRING_TRIBBLE_HOME_APPLICATION="$PURRING_TRIBBLE_HOME/application"
+export PURRING_TRIBBLE_HOME_JUPYTER="$PURRING_TRIBBLE_HOME/jupyter"
 export PURRING_TRIBBLE_HOME_UI="$PURRING_TRIBBLE_HOME/ui"
 export PURRING_TRIBBLE_HOME_TMP="$PURRING_TRIBBLE_HOME/tmp"
 export PURRING_TRIBBLE_HOME_LOGS="$PURRING_TRIBBLE_HOME/logs"
-MACOS_LOCAL_LAUNCHD="~/Library/LaunchAgents"
 
 if [ ! -d "$PURRING_TRIBBLE_HOME_TMP" ]; then
     mkdir -p $PURRING_TRIBBLE_HOME_TMP
@@ -27,8 +27,10 @@ fi
 if [ ! -d "$PURRING_TRIBBLE_HOME_APPLICATION" ]; then
     mkdir -p $PURRING_TRIBBLE_HOME_APPLICATION
 fi
+if [ ! -d "$PURRING_TRIBBLE_HOME_JUPYTER" ]; then
+    mkdir -p $PURRING_TRIBBLE_HOME_JUPYTER
+fi
 
-cp clear_database.sh $PURRING_TRIBBLE_HOME_APPLICATION
 cp clock.sh $PURRING_TRIBBLE_HOME_APPLICATION
 cp public_holidays.json $PURRING_TRIBBLE_HOME_APPLICATION
 cp special_days_template.json $PURRING_TRIBBLE_HOME_APPLICATION/special_days_template.json
@@ -36,13 +38,6 @@ cp run_tribble.sh $PURRING_TRIBBLE_HOME_APPLICATION
 cp config.json $PURRING_TRIBBLE_HOME_APPLICATION
 
 sed -i "" "s|PURRING_TRIBBLE_HOME_VARIABLE|$PURRING_TRIBBLE_HOME|g" $PURRING_TRIBBLE_HOME_APPLICATION/run_tribble.sh
-
-#cp template_jubilant_tribble.plist $PURRING_TRIBBLE_HOME/tmp/
-
-#sed -i "" "s|{tribble_install_path}|$PURRING_TRIBBLE_HOME/tribble_loop.sh|g" ${PURRING_TRIBBLE_HOME}/tmp/template_jubilant_tribble.plist
-
-# move .plist file to $MACOS_LOCAL_LAUNCHD and rename it to com.$USER.jubilant_tribble.plist
-# activate in launchd using launchctl load com.$USER.jubilant_tribble.plist
 
 BACKUP_NAME="backup_$(date +"%Y%m%d%H%M%S")"
 
@@ -58,5 +53,26 @@ sqlite3 $PURRING_TRIBBLE_HOME_APPLICATION/tribble.db <<'END_SQL'
 .timeout 2000
 CREATE TABLE IF NOT EXISTS worktime(timeslot_begin timestamp NOT NULL, timeslot_end timestamp, timeslot_finish boolean, t_id NUMERIC, symbol text, type text, comment text, timezone TEXT DEFAULT "+0000" NOT NULL);
 END_SQL
+
+read -p "Do you want to install jupyterlab to analyse your data? [yes/no, default is yes]:" USER_INPUT_INSTALL_JUPYTER
+USER_INPUT_INSTALL_JUPYTER=${USER_INPUT_INSTALL_JUPYTER:-yes}
+
+if [ "$USER_INPUT_INSTALL_JUPYTER" = "yes" ]; then
+    cd jupyterlab_ui
+    zsh install_jupyterlab_conda.sh
+    cd ..
+fi
+
+read -p "Do you want to install tribble ui? [yes/no, default is yes]:" USER_INPUT_INSTALL_UI
+USER_INPUT_INSTALL_UI=${USER_INPUT_INSTALL_UI:-yes}
+
+if [ "$USER_INPUT_INSTALL_UI" = "yes" ]; then
+    mkdir -p $PURRING_TRIBBLE_HOME_UI
+    cp -r electron_ui/ $PURRING_TRIBBLE_HOME_UI
+    current_dir=$(pwd)
+    cd $PURRING_TRIBBLE_HOME_UI
+    npm install
+    cd $current_dir
+fi
 
 echo "I finished my work! You can now use purring-tribble."
