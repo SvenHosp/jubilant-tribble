@@ -6,5 +6,9 @@
         {
             "name": "operations"
         }
-    ]
+    ],
+    "electron_ui": {
+        "height": 300,
+        "width": 200
+    }
 }

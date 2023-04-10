@@ -1,16 +1,16 @@
 #!/bin/bash
 
-TRIBBLE_CONDA_ENV_NAME=jubilant_tribble_jupyterlab
+TRIBBLE_CONDA_ENV_NAME=purring_tribble_jupyterlab
 
 read -p "Please enter the installation directory path for tribble jupyter ui [~/tribble_ui]:" USER_INPUT_INSTALL_DIRECTORY
-JUBILANT_TRIBBLE_HOME_UI=${USER_INPUT_INSTALL_DIRECTORY:-~/tribble_ui}
+PURRING_TRIBBLE_HOME_UI=${USER_INPUT_INSTALL_DIRECTORY:-~/tribble_ui}
 
 # https://stackoverflow.com/questions/70597896/check-if-conda-env-exists-and-create-if-not-in-bash
 find_in_conda_env(){
    conda env list | grep "${@}" >/dev/null 2>/dev/null
 }
 
-if [ ! -z $JUBILANT_TRIBBLE_HOME ]; then
+if [ ! -z $PURRING_TRIBBLE_HOME ]; then
 
     BACKUP_NAME="backup_$(date +"%Y%m%d%H%M%S")"
 
@@ -29,21 +29,21 @@ if [ ! -z $JUBILANT_TRIBBLE_HOME ]; then
         conda run -n $TRIBBLE_CONDA_ENV_NAME pip install  -r requirements.txt
     fi
 
-    ! grep "export JUBILANT_TRIBBLE_HOME_UI=" ~/.zshrc && echo "export JUBILANT_TRIBBLE_HOME_UI=$JUBILANT_TRIBBLE_HOME_UI" >> ~/.zshrc
+    ! grep "export PURRING_TRIBBLE_HOME_UI=" ~/.zshrc && echo "export PURRING_TRIBBLE_HOME_UI=$PURRING_TRIBBLE_HOME_UI" >> ~/.zshrc
 
-    ! grep "alias tribble_ui=" ~/.zshrc && echo 'alias tribble_ui="$JUBILANT_TRIBBLE_HOME/start_tribble_ui.sh"' >> ~/.zshrc
+    ! grep "alias tribble_ui=" ~/.zshrc && echo 'alias tribble_ui="$PURRING_TRIBBLE_HOME/start_tribble_ui.sh"' >> ~/.zshrc
 
-    echo "Begin copying scripts to JUBILANT_TRIBBLE_HOME."
-    cp start_tribble_ui.sh $JUBILANT_TRIBBLE_HOME
+    echo "Begin copying scripts to PURRING_TRIBBLE_HOME."
+    cp start_tribble_ui.sh $PURRING_TRIBBLE_HOME
     
-    mkdir -p $JUBILANT_TRIBBLE_HOME/workspaces
-    cp workspaces/* $JUBILANT_TRIBBLE_HOME/workspaces/
+    mkdir -p $PURRING_TRIBBLE_HOME/workspaces
+    cp workspaces/* $PURRING_TRIBBLE_HOME/workspaces/
 
-    sed -i "" "s|<TRIBBLE_MAIN_PATH>|$JUBILANT_TRIBBLE_HOME_UI|g" ${JUBILANT_TRIBBLE_HOME}/workspaces/tribble.json
+    sed -i "" "s|<TRIBBLE_MAIN_PATH>|$PURRING_TRIBBLE_HOME_UI|g" ${PURRING_TRIBBLE_HOME}/workspaces/tribble.json
 
-    cp tribble_status.ipynb $JUBILANT_TRIBBLE_HOME
-    cp tribble.ipynb $JUBILANT_TRIBBLE_HOME
+    cp tribble_status.ipynb $PURRING_TRIBBLE_HOME
+    cp tribble.ipynb $PURRING_TRIBBLE_HOME
 
 else
-    echo "Environment Variable JUBILANT_TRIBBLE_HOME is not set. Please install juilant tribble before!"
+    echo "Environment Variable PURRING_TRIBBLE_HOME is not set. Please install juilant tribble before!"
 fi
