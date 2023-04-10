@@ -31,19 +31,9 @@ To make it simple to execute the shell commands you can add shortcuts to your me
 
 Go to shortcuts app, click on __+__ button (new shortcut), look for __execute shell script__, copy shell script from below to the edit field. With click on the information symbol (i) you can configure to pin your shortcut to menu bar for example.
 
-### script to execute tribble start
-```shell
-source ~/.zshrc
-tribble_start
-```
-
-### script to execute tribble end
-```shell
-source ~/.zshrc
-tribble_end
-```
-
 ## Supported Environments
 
 - MacOS:
   - shell: zsh
+
+## Applications Architecture
