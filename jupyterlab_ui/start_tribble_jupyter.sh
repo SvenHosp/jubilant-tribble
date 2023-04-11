@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if [ -z $PURRING_TRIBBLE_CONDA_ENV_NAME ]; then
+if [ -z $PURRING_TRIBBLE_HOME ]; then
     echo "Environment Variable PURRING_TRIBBLE_HOME is not set. Please install juilant tribble before!"
     exit -1
 fi
 
 if [ -z $PURRING_TRIBBLE_CONDA_ENV_NAME ]; then
-    echo "Environment Variable TRIBBLE_CONDA_ENV_NAME is not set. Please install jupyterlab_ui before!"
+    echo "Environment Variable PURRING_TRIBBLE_CONDA_ENV_NAME is not set. Please install jupyterlab_ui before!"
     exit -1
 fi
 
