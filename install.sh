@@ -34,7 +34,12 @@ fi
 cp clock.sh $PURRING_TRIBBLE_HOME_APPLICATION
 cp public_holidays.json $PURRING_TRIBBLE_HOME_APPLICATION
 cp run_tribble.sh $PURRING_TRIBBLE_HOME_APPLICATION
-cp config.json $PURRING_TRIBBLE_HOME_APPLICATION
+
+if [ ! -f "$PURRING_TRIBBLE_HOME_APPLICATION/config.json" ]; then
+    cp config.json $PURRING_TRIBBLE_HOME_APPLICATION
+else
+    echo "File config.json exists please view changes."
+fi
 
 sed -i "" "s|PURRING_TRIBBLE_HOME_VARIABLE|$PURRING_TRIBBLE_HOME|g" $PURRING_TRIBBLE_HOME_APPLICATION/run_tribble.sh
 
