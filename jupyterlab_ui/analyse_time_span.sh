@@ -2,6 +2,7 @@
 
 TIME_SPAN_BEGIN=$1
 TIME_SPAN_END=$2
+EXPORT_PATH=$3
 
 TIMESTAMP=$(date -u +"%Y-%m-%d %T")
 
@@ -12,6 +13,11 @@ fi
 
 if [ -z "$TIME_SPAN_END" ]; then
     echo "[error, $TIMESTAMP, analyse_time_span.sh] - missing TIME_SPAN_END, exit unexpected!" >> $PURRING_TRIBBLE_HOME_LOGS/tribble.log
+    exit -1
+fi
+
+if [ -z "$EXPORT_PATH" ]; then
+    echo "[error, $TIMESTAMP, analyse_time_span.sh] - missing EXPORT_PATH, exit unexpected!" >> $PURRING_TRIBBLE_HOME_LOGS/tribble.log
     exit -1
 fi
 
@@ -31,3 +37,6 @@ sed -i "" "s|<TIMESPAN_BEGIN>|$TIME_SPAN_BEGIN|g" $PURRING_TRIBBLE_HOME_TMP/trib
 sed -i "" "s|<TIMESPAN_END>|$TIME_SPAN_END|g" $PURRING_TRIBBLE_HOME_TMP/tribble.ipynb
 
 conda run -n $PURRING_TRIBBLE_CONDA_ENV_NAME python -m  jupyter nbconvert --to html --no-input --execute $PURRING_TRIBBLE_HOME_TMP/tribble.ipynb
+
+echo "copy execution result to $EXPORT_PATH."
+cp $PURRING_TRIBBLE_HOME_TMP/tribble.html $EXPORT_PATH

@@ -58,7 +58,7 @@ Go to shortcuts app, click on __+__ button (new shortcut), look for __execute sh
 After choosing the jupyterlab option to yes, you can run
 
 ```shell
-zsh $PURRING_TRIBBLE_HOME_JUPYTER/analyse_time_span.sh "01.04.2023" "11.04.2023"
+zsh $PURRING_TRIBBLE_HOME_JUPYTER/analyse_time_span.sh "01.04.2023" "11.04.2023" "enter/your/path.html"
 ```
 
 It analyse the given time span and reports it to html.
