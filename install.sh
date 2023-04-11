@@ -33,7 +33,6 @@ fi
 
 cp clock.sh $PURRING_TRIBBLE_HOME_APPLICATION
 cp public_holidays.json $PURRING_TRIBBLE_HOME_APPLICATION
-cp special_days_template.json $PURRING_TRIBBLE_HOME_APPLICATION/special_days_template.json
 cp run_tribble.sh $PURRING_TRIBBLE_HOME_APPLICATION
 cp config.json $PURRING_TRIBBLE_HOME_APPLICATION
 
@@ -52,6 +51,11 @@ echo "Now, I create your database: $PURRING_TRIBBLE_HOME/tribble.db"
 sqlite3 $PURRING_TRIBBLE_HOME_APPLICATION/tribble.db <<'END_SQL'
 .timeout 2000
 CREATE TABLE IF NOT EXISTS worktime(timeslot_begin timestamp NOT NULL, timeslot_end timestamp, timeslot_finish boolean, t_id NUMERIC, symbol text, type text, comment text, timezone TEXT DEFAULT "+0000" NOT NULL);
+END_SQL
+
+sqlite3 $PURRING_TRIBBLE_HOME_APPLICATION/tribble.db <<'END_SQL'
+.timeout 2000
+CREATE TABLE IF NOT EXISTS worktime_special(timeslot_begin timestamp NOT NULL, timeslot_end timestamp, worktime_multiplicator NUMERIC, type text, comment text, timezone TEXT DEFAULT "+0000" NOT NULL);
 END_SQL
 
 read -p "Do you want to install jupyterlab to analyse your data? [yes/no, default is yes]:" USER_INPUT_INSTALL_JUPYTER
