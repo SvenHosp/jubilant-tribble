@@ -14,26 +14,5 @@
     "formats":{
         "time_format": "%d.%m.%Y",
         "time_span_delimiter": "-"
-    },
-    "worktime_config": {
-        "default": {
-            "monday": 7.8,
-            "tuesday": 7.8,
-            "wednesday": 7.8,
-            "thursday": 7.8,
-            "friday": 7.8
-        },
-        "special": [
-            {
-                "time_span": "01.09.2020-",
-                "working_hours": {
-                    "monday": 5,
-                    "tuesday": 5,
-                    "wednesday": 5,
-                    "thursday": 5,
-                    "friday": 5
-                }
-            }
-        ]
     }
 }

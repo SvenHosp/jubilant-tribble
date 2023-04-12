@@ -63,6 +63,11 @@ sqlite3 $PURRING_TRIBBLE_HOME_APPLICATION/tribble.db <<'END_SQL'
 CREATE TABLE IF NOT EXISTS worktime_special(timeslot_begin timestamp NOT NULL, timeslot_end timestamp, worktime_multiplicator NUMERIC, type text, comment text, timezone TEXT DEFAULT "+0000" NOT NULL);
 END_SQL
 
+sqlite3 $PURRING_TRIBBLE_HOME_APPLICATION/tribble.db <<'END_SQL'
+.timeout 2000
+CREATE TABLE IF NOT EXISTS worktime_hours(timeslot_begin timestamp NOT NULL, timeslot_end timestamp, hours_distribution text, comment text, timezone TEXT DEFAULT "+0000" NOT NULL);
+END_SQL
+
 read -p "Do you want to install jupyterlab to analyse your data? [yes/no, default is yes]:" USER_INPUT_INSTALL_JUPYTER
 USER_INPUT_INSTALL_JUPYTER=${USER_INPUT_INSTALL_JUPYTER:-yes}
 
