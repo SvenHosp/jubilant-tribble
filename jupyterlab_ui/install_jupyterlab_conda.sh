@@ -32,6 +32,7 @@ if [ ! -z $PURRING_TRIBBLE_HOME ]; then
 
     cp tribble_status.ipynb $PURRING_TRIBBLE_HOME_JUPYTER
     cp tribble.ipynb $PURRING_TRIBBLE_HOME_JUPYTER
+    cp tribble_helper.ipynb $PURRING_TRIBBLE_HOME_JUPYTER
 
 else
     echo "Environment Variable PURRING_TRIBBLE_HOME is not set. Please install purring tribble before!"
