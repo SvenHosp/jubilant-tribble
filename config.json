@@ -11,6 +11,10 @@
         "height": 300,
         "width": 200
     },
+    "location":{
+        "country": "germany",
+        "territory": "B"
+    },
     "formats":{
         "time_format": "%d.%m.%Y",
         "time_span_delimiter": "-"

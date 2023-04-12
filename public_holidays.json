@@ -178,7 +178,7 @@
         }
     },
     {
-        "day": "03.10.",
+        "day": "03.10",
         "name": {
             "english": "Tag der deutschen Einheit",
             "german": "Tag der deutschen Einheit"
@@ -196,7 +196,7 @@
         "formula": {}
     },
     {
-        "day": "31.10.",
+        "day": "31.10",
         "name": {
             "english": "reformation day",
             "german": "Reformationstag"
@@ -213,7 +213,7 @@
         "formula": {}
     },
     {
-        "day": "25.12.",
+        "day": "25.12",
         "name": {
             "english": "1st christmas day",
             "german": "Erster Weihnachtstag"
@@ -231,7 +231,7 @@
         "formula": {}
     },
     {
-        "day": "26.12.",
+        "day": "26.12",
         "name": {
             "english": "2nd christmas day",
             "german": "Zweiter Weihnachtstag"
