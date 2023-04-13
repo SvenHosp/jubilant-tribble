@@ -13,4 +13,6 @@ export PURRING_TRIBBLE_WORKSPACES=$PURRING_TRIBBLE_HOME_JUPYTER/workspaces
 export PURRING_TRIBBLE_CONDA_ENV_NAME=purring_tribble_jupyterlab
 
 alias tribble="npm start --prefix ${PURRING_TRIBBLE_HOME_UI}"
+alias tribble_visualize="$PURRING_TRIBBLE_HOME_JUPYTER/analyse_time_span.sh"
+alias tribble_hours="$PURRING_TRIBBLE_HOME_JUPYTER/calculate_working_hours.sh"
 alias tribble_jupyter="$PURRING_TRIBBLE_HOME_APPLICATION/start_tribble_jupyter.sh"

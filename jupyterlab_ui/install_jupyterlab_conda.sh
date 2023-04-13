@@ -24,6 +24,7 @@ if [ ! -z $PURRING_TRIBBLE_HOME ]; then
     echo "Begin copying scripts to PURRING_TRIBBLE_HOME_JUPYTER."
     cp start_tribble_jupyter.sh $PURRING_TRIBBLE_HOME_JUPYTER/start_tribble_jupyter.sh
     cp analyse_time_span.sh $PURRING_TRIBBLE_HOME_JUPYTER/analyse_time_span.sh
+    cp calculate_working_hours.sh $PURRING_TRIBBLE_HOME_JUPYTER/calculate_working_hours.sh
     
     mkdir -p $PURRING_TRIBBLE_WORKSPACES
     cp workspaces/* $PURRING_TRIBBLE_WORKSPACES/
