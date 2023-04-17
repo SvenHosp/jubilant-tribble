@@ -53,15 +53,27 @@ To make it simple to execute the shell commands you can add shortcuts to your me
 
 Go to shortcuts app, click on __+__ button (new shortcut), look for __execute shell script__, copy shell script from above to the edit field. With click on the information symbol (i) you can configure to pin your shortcut to menu bar for example.
 
-## Export notebook to html
+## Tools to analyze your worktime
 
-After choosing the jupyterlab option to yes, you can run
+### Get hours worked per day and topic
+
+During Installation, after choosing the jupyterlab option to yes, you can run
 
 ```shell
-zsh $PURRING_TRIBBLE_HOME_JUPYTER/analyse_time_span.sh "01.04.2023" "11.04.2023" "enter/your/path.html"
+tribble_visualize "01.04.2023" "11.04.2023" "enter/your/path.html"
 ```
 
 It analyse the given time span and reports it to html.
+
+### Get hours worked per day
+
+During Installation, after choosing the jupyterlab option to yes, you can run
+
+```shell
+tribble_hours "01.04.2023" "11.04.2023" "enter/your/path.csv"
+```
+
+It calculates worked hours and needed hours to be worked for a given time span. It takes public holidays, holidays and illness into account.
 
 ## Supported Environments
 
