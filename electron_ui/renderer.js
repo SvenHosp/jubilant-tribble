@@ -19,3 +19,11 @@ window.electronAPI.receive_active_clocks((_event, active_clocks, symbol_types) =
     }
   })
 })
+
+window.electronAPI.receive_current_hours((_event, current_hours) => {
+  //const active_clocks_html = document.getElementById('span_db_status')
+  //active_clocks_html.innerText = active_clocks
+
+  const hour_span = document.getElementById(`span_get_current_hours`)
+  hour_span.innerText = current_hours
+})

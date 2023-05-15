@@ -37,6 +37,38 @@ ipcMain.handle('get_active_clocks', async (event) => {
   get_active_clocks()
 })
 
+async function get_current_hours() {
+  const DATABASE_PATH = process.env.PURRING_TRIBBLE_DATABASE
+
+  const db = new sqlite3.Database(DATABASE_PATH, (err) => {
+    if (err) {
+      return err.message
+    }
+  });
+
+  let sql = "select ROUND(SUM(time_worked),2) as time_worked FROM (SELECT SUM(ROUND((JULIANDAY(timeslot_end) - JULIANDAY(timeslot_begin)) * 24,2)) as time_worked FROM worktime w WHERE DATE(timeslot_begin) == DATE() AND symbol == 'common' AND timeslot_finish == TRUE union SELECT SUM(ROUND((JULIANDAY(CURRENT_TIMESTAMP) - JULIANDAY(timeslot_begin)) * 24,2)) as time_worked FROM worktime w WHERE DATE(timeslot_begin) == DATE() AND symbol == 'common' AND timeslot_finish == FALSE);"
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    var _current_hours = ''
+    rows.forEach((row) => {
+      _current_hours = row.time_worked;
+    });
+
+    BrowserWindow.getAllWindows().forEach((window) => {
+      window.webContents.send('send_current_hours', _current_hours)
+    });
+  });
+
+  db.close();
+}
+
+ipcMain.handle('get_current_hours', async (event) => {
+  get_current_hours()
+})
+
 ipcMain.handle('get_clock_types', async (event) => {
   const application_path = process.env.PURRING_TRIBBLE_HOME_APPLICATION
   let path = `${application_path}/config.json`
@@ -63,8 +95,8 @@ ipcMain.handle('clock_hours', async (event, symbol) => {
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 200,
-    height: 300,
+    width: 250,
+    height: 400,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
